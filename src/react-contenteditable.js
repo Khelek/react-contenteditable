@@ -21,12 +21,13 @@ export default class ContentEditable extends React.Component {
 
   shouldComponentUpdate(nextProps) {
     return !this.htmlEl || nextProps.html !== this.htmlEl.innerHTML ||
-            this.props.disabled !== nextProps.disabled;
+            this.props.disabled !== nextProps.disabled || nextProps.html !== this.lastHtml;
   }
 
   componentDidUpdate() {
     if ( this.htmlEl && this.props.html !== this.htmlEl.innerHTML ) {
      this.htmlEl.innerHTML = this.props.html;
+     this.lastHtml = this.props.html;
     }
   }
 
